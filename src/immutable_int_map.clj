@@ -73,7 +73,7 @@
                 acc)]
       acc))
 
-  (get [_ k default]
+  (get [this k default]
     (if (p/<= k prefix)
       (.get left k default)
       (.get right k default)))
@@ -85,7 +85,7 @@
         (if (instance? Empty left)
           (let [n (leaf k epoch' v)]
             (if (p/== epoch epoch')
-              (set! left n)
+              (do (set! left n) this)
               (branch prefix mask epoch' n right)))
           (let [left' (.assoc left k epoch' v)]
             (if (identical? left left')
@@ -94,7 +94,7 @@
         (if (instance? Empty right)
           (let [n (leaf k epoch' v)]
             (if (p/== epoch epoch')
-              (set! right n)
+              (do (set! right n) this)
               (branch prefix mask epoch' left n)))
           (let [right' (.assoc right k epoch' v)]
             (if (identical? right right')
@@ -152,10 +152,10 @@
   (toString [_]
     (pr-str {:key key :epoch epoch :value value})))
 
-(defn leaf [^long key ^long epoch value]
+(defn- leaf [^long key ^long epoch value]
   (Leaf. key epoch value))
 
-(defn branch [prefix mask epoch left right]
+(defn- branch [prefix mask epoch left right]
   (Branch. (bit-mask (p/long prefix) (p/long mask)) mask epoch left right))
 
 ;;;
@@ -164,6 +164,8 @@
   (if (eval test)
     then
     else))
+
+(declare ->transient)
 
 (deftype PersistentIntMap
   [^INode root
@@ -176,6 +178,10 @@
 
   clojure.lang.MapEquivalence
 
+  clojure.lang.Counted
+  (count [this]
+    (count (seq this)))
+
   clojure.lang.IPersistentCollection
 
   (equiv [this x]
@@ -184,14 +190,7 @@
   (cons [this o]
     (if (map? o)
       (reduce #(apply assoc %1 %2) this o)
-      (if-let [[k v] (seq o)]
-        (assoc this k v)
-        this)))
-
-  clojure.lang.Counted
-
-  (count [this]
-    (count (seq this)))
+      (.assoc this (nth o 0) (nth o 1))))
 
   clojure.lang.Seqable
   (seq [this]
@@ -258,9 +257,9 @@
   (empty [this]
     (PersistentIntMap. (Empty.) 0 nil))
 
-  #_clojure.lang.IEditableCollection
-  #_(asTransient [this]
-    )
+  clojure.lang.IEditableCollection
+  (asTransient [this]
+    (->transient root epoch meta))
 
   java.util.Map
   (get [this k]
@@ -296,8 +295,6 @@
   (without [this k]
     (let [k (long k)
           epoch' (p/inc epoch)]
-      (when (p/< k 0)
-        (throw (IllegalArgumentException. "int-map can only have positive integers as keys")))
       (PersistentIntMap.
         (or
           (.dissoc root k epoch')
@@ -312,6 +309,96 @@
 
   (invoke [this k default]
     (.valAt this k default)))
+
+(deftype TransientIntMap
+  [^INode root
+   ^long epoch
+   meta]
+
+  clojure.lang.IObj
+  (meta [_] meta)
+  (withMeta [_ m] (TransientIntMap. root (p/inc epoch) meta))
+
+  clojure.lang.Counted
+  (count [this]
+    (count (seq this)))
+
+  clojure.lang.MapEquivalence
+
+  (equiv [this x]
+    (and (map? x) (= x (into {} this))))
+
+  clojure.lang.Seqable
+  (seq [this]
+    (seq (persistent! (.entries root (transient [])))))
+
+  Object
+  (hashCode [this]
+    (reduce
+      (fn [acc [k v]]
+        (unchecked-add acc (bit-xor (hash k) (hash v))))
+      0
+      (seq this)))
+
+  (equals [this x]
+    (or (identical? this x)
+      (and
+        (map? x)
+        (= x (into {} this)))))
+
+  (toString [this]
+    (str (into {} this)))
+
+  clojure.lang.ILookup
+  (valAt [this k]
+    (.valAt this k nil))
+  (valAt [this k default]
+    (.get root k default))
+
+  clojure.lang.Associative
+  (containsKey [this k]
+    (not (identical? ::not-found (.valAt this k ::not-found))))
+
+  (entryAt [this k]
+    (let [v (.valAt this k ::not-found)]
+      (when (not= v ::not-found)
+        (clojure.lang.MapEntry. k v))))
+
+  clojure.lang.ITransientMap
+
+  (assoc [this k v]
+    (let [k (long k)
+          _ (when (p/< k 0)
+              (throw (IllegalArgumentException. "int-map can only have positive integers as keys")))
+          root' (.assoc root (long k) epoch v)]
+      (if (identical? root' root)
+        this
+        (TransientIntMap. root' epoch meta))))
+
+  (conj [this o]
+    (if (map? o)
+      (reduce #(apply assoc! %1 %2) this o)
+      (.assoc this (nth o 0) (nth o 1))))
+
+  (persistent [_]
+    (PersistentIntMap. root (p/inc epoch) meta))
+
+  (without [this k]
+    (let [root' (.dissoc root (long k) epoch)]
+      (if (identical? root' root)
+        this
+        (TransientIntMap. root' epoch meta))))
+
+  clojure.lang.IFn
+
+  (invoke [this k]
+    (.valAt this k))
+
+  (invoke [this k default]
+    (.valAt this k default)))
+
+(defn- ->transient [root ^long epoch meta]
+  (TransientIntMap. root epoch meta))
 
 (defn int-map
   ([]

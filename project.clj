@@ -5,4 +5,7 @@
   :dependencies [[primitive-math "0.1.3"]]
   :profiles {:dev {:dependencies [[org.clojure/clojure "1.6.0"]
                                   [collection-check "0.1.2"]
-                                  [criterium "0.4.3"]]}})
+                                  [criterium "0.4.3"]]}}
+  :test-selectors {:default (complement :benchmark)
+                   :benchmark :benchmark}
+  :jvm-opts ["-server"])

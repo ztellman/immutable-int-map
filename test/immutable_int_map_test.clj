@@ -10,4 +10,15 @@
     [simple-check.clojure-test :as ct :refer (defspec)]))
 
 (deftest test-map-like
-  (check/assert-map-like 1e4 (i/int-map) gen/pos-int gen/int))
+  (check/assert-map-like 1e3 (i/int-map) gen/pos-int gen/int))
+
+(def entries (vec (map vector (range 1e6) (range 1e6))))
+
+(deftest ^:benchmark benchmark-maps
+  (println "assoc values")
+  (c/quick-bench
+    (into {} entries))
+
+  (println "into int-map 1e3 entries")
+  (c/quick-bench
+    (into (i/int-map) entries)))
