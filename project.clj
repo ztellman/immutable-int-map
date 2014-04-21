@@ -1,4 +1,4 @@
-(defproject immutable-int-map "0.1.0-SNAPSHOT"
+(defproject immutable-int-map "0.1.0"
   :description "an immutable map of integers onto values"
   :license {:name "MIT License"
             :url "http://opensource.org/licenses/MIT"}
