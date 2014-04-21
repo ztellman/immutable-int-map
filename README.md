@@ -31,7 +31,7 @@ Under the covers, `into` looks something like this:
       [[1 2] [3 4]]))
 ```
 
-This makes use of Clojure's transients, but is still inherently sequential.  This is because merging together standard Clojure maps is an O(N) operation.  However, int-maps merges are typically much more efficient than O(N), which means we can build sub-maps on parallel thread, and then merge them together.  We can use the `fold` method in `clojure.core.reducers` to easily express this:
+This makes use of Clojure's transients, but is still inherently sequential.  This is because merging together standard Clojure maps is an O(N) operation.  However, int-maps merges are usually must faster, which means we can build sub-maps on parallel threads, and then cheaply merge them together.  We can use the `fold` method in `clojure.core.reducers` to easily express this:
 
 ```clj
 > (require '[clojure.core.reducers :as r])
