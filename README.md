@@ -43,7 +43,7 @@ nil
 The performance benefits of this are significant.  Consider this table, which gives the times on a four-core system for populating a map with a million entries, with all values in milliseconds:
 
 | | unsorted entries | sorted entries |
----------------------------------------
+|-|------------------|----------------|
 | into {} | 615 | 500 |
 | into (sorted-map) | 2140 | 1200 |
 | into int-map | 1200 | 250 |
