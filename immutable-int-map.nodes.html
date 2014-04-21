@@ -1,0 +1,161 @@
+<html lang="en">
+  <head>
+    <title>immutable-int-map.nodes documentation</title>
+    <link href="css/default.css" type="text/css" rel="stylesheet" />
+    <link href="css/codox-md.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/page_effects.js"></script>
+  </head>
+  <body>
+    <header>
+      <div id="header">
+        <h1 class="project-title">Immutable-int-map 0.1.0 API documentation</h1>
+      </div>
+    </header>
+    <navigation>
+      <div id="namespaces" class="sidebar">
+        <h3>Namespaces</h3>
+        <ul class="ns-links">
+          <li class="ns-list"><a class="ns-link ns-name" href="immutable-int-map.html">immutable-int-map</a></li><li class="ns-list"><a class="ns-link ns-name" href="immutable-int-map.nodes.html">immutable-int-map.nodes</a></li>
+        </ul>
+      </div>
+      <div id="vars" class="sidebar">
+        <h3>Public Vars</h3>
+        <ul class="ns-var-links">
+          <li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.nodes.html#var--%3EBranch">-&gt;Branch</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.nodes.html#var--%3EEmpty">-&gt;Empty</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.nodes.html#var--%3ELeaf">-&gt;Leaf</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.nodes.html#var--%3ETuple2">-&gt;Tuple2</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.nodes.html#var-bit-mask">bit-mask</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.nodes.html#var-branch">branch</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.nodes.html#var-branch*">branch*</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.nodes.html#var-branch-">branch-</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.nodes.html#var-branching-bit">branching-bit</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.nodes.html#var-highest-bit">highest-bit</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.nodes.html#var-join">join</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.nodes.html#var-leaf">leaf</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.nodes.html#var-lowest-bit">lowest-bit</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.nodes.html#var-match-prefix%3F">match-prefix?</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.nodes.html#var-off%3F">off?</a></li>
+        </ul>
+      </div>
+    </navigation>
+    <article>
+      <div id="content" class="namespace-docs">
+        <h2 class="namespace-title">immutable-int-map.nodes documentation</h2>
+        <div class="doc">
+</div>
+        <div class="ns-vars">
+          <div class="public">
+            <h3><a id="var--%3EBranch" class="source var-name" href="src/immutable_int_map/nodes.clj">-&gt;Branch</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[prefix mask epoch count left right]</div>
+            
+            
+            <div class="doc"><p>Positional factory function for class immutable<em>int</em>map.nodes.Branch.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var--%3EEmpty" class="source var-name" href="src/immutable_int_map/nodes.clj">-&gt;Empty</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[]</div>
+            
+            
+            <div class="doc"><p>Positional factory function for class immutable<em>int</em>map.nodes.Empty.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var--%3ELeaf" class="source var-name" href="src/immutable_int_map/nodes.clj">-&gt;Leaf</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[key epoch value]</div>
+            
+            
+            <div class="doc"><p>Positional factory function for class immutable<em>int</em>map.nodes.Leaf.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var--%3ETuple2" class="source var-name" href="src/immutable_int_map/nodes.clj">-&gt;Tuple2</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[a b]</div>
+            
+            
+            <div class="doc"><p>Positional factory function for class immutable<em>int</em>map.nodes.Tuple2.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var-bit-mask" class="source var-name" href="src/immutable_int_map/nodes.clj">bit-mask</a></h3>
+            <h4 class="var-type macro" id="var-type">macro</h4>
+            <div class="usage">[x m]</div>
+            
+            
+            <div class="doc">
+</div>
+          </div><div class="public">
+            <h3><a id="var-branch" class="source var-name" href="src/immutable_int_map/nodes.clj">branch</a></h3>
+            <h4 class="var-type macro" id="var-type">macro</h4>
+            <div class="usage">[prefix mask epoch left right]</div>
+            
+            
+            <div class="doc">
+</div>
+          </div><div class="public">
+            <h3><a id="var-branch*" class="source var-name" href="src/immutable_int_map/nodes.clj">branch*</a></h3>
+            <h4 class="var-type macro" id="var-type">macro</h4>
+            <div class="usage">[prefix mask epoch left right]</div>
+            
+            
+            <div class="doc">
+</div>
+          </div><div class="public">
+            <h3><a id="var-branch-" class="source var-name" href="src/immutable_int_map/nodes.clj">branch-</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[prefix mask epoch left+right]</div>
+            
+            
+            <div class="doc">
+</div>
+          </div><div class="public">
+            <h3><a id="var-branching-bit" class="source var-name" href="src/immutable_int_map/nodes.clj">branching-bit</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[p0 m0 p1 m1]</div>
+            
+            
+            <div class="doc">
+</div>
+          </div><div class="public">
+            <h3><a id="var-highest-bit" class="source var-name" href="src/immutable_int_map/nodes.clj">highest-bit</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[x m]</div>
+            
+            
+            <div class="doc">
+</div>
+          </div><div class="public">
+            <h3><a id="var-join" class="source var-name" href="src/immutable_int_map/nodes.clj">join</a></h3>
+            <h4 class="var-type macro" id="var-type">macro</h4>
+            <div class="usage">[epoch p0 m0 t0 p1 m1 t1]</div>
+            
+            
+            <div class="doc">
+</div>
+          </div><div class="public">
+            <h3><a id="var-leaf" class="source var-name" href="src/immutable_int_map/nodes.clj">leaf</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[key epoch value]</div>
+            
+            
+            <div class="doc">
+</div>
+          </div><div class="public">
+            <h3><a id="var-lowest-bit" class="source var-name" href="src/immutable_int_map/nodes.clj">lowest-bit</a></h3>
+            <h4 class="var-type macro" id="var-type">macro</h4>
+            <div class="usage">[x]</div>
+            
+            
+            <div class="doc">
+</div>
+          </div><div class="public">
+            <h3><a id="var-match-prefix%3F" class="source var-name" href="src/immutable_int_map/nodes.clj">match-prefix?</a></h3>
+            <h4 class="var-type macro" id="var-type">macro</h4>
+            <div class="usage">[k p m]</div>
+            
+            
+            <div class="doc">
+</div>
+          </div><div class="public">
+            <h3><a id="var-off%3F" class="source var-name" href="src/immutable_int_map/nodes.clj">off?</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[x m]</div>
+            
+            
+            <div class="doc">
+</div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </body>
+
+</html>

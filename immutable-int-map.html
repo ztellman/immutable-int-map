@@ -1,0 +1,99 @@
+<html lang="en">
+  <head>
+    <title>immutable-int-map documentation</title>
+    <link href="css/default.css" type="text/css" rel="stylesheet" />
+    <link href="css/codox-md.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/page_effects.js"></script>
+  </head>
+  <body>
+    <header>
+      <div id="header">
+        <h1 class="project-title">Immutable-int-map 0.1.0 API documentation</h1>
+      </div>
+    </header>
+    <navigation>
+      <div id="namespaces" class="sidebar">
+        <h3>Namespaces</h3>
+        <ul class="ns-links">
+          <li class="ns-list"><a class="ns-link ns-name" href="immutable-int-map.html">immutable-int-map</a></li><li class="ns-list"><a class="ns-link ns-name" href="immutable-int-map.nodes.html">immutable-int-map.nodes</a></li>
+        </ul>
+      </div>
+      <div id="vars" class="sidebar">
+        <h3>Public Vars</h3>
+        <ul class="ns-var-links">
+          <li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.html#var--%3EPersistentIntMap">-&gt;PersistentIntMap</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.html#var--%3ETransientIntMap">-&gt;TransientIntMap</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.html#var-int-map">int-map</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.html#var-merge">merge</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.html#var-merge-with">merge-with</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.html#var-update">update</a></li><li class="ns-var-list"><a class="ns-var-link ns-var-name" href="immutable-int-map.html#var-update%21">update!</a></li>
+        </ul>
+      </div>
+    </navigation>
+    <article>
+      <div id="content" class="namespace-docs">
+        <h2 class="namespace-title">immutable-int-map documentation</h2>
+        <div class="doc"><p>A straightforward port of Okasaki and Gill's "Fast Mergeable Integer Maps`",
+which can be found at http://ittc.ku.edu/~andygill/papers/IntMap98.pdf</p>
+</div>
+        <div class="ns-vars">
+          <div class="public">
+            <h3><a id="var--%3EPersistentIntMap" class="source var-name" href="src/immutable_int_map.clj">-&gt;PersistentIntMap</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[root epoch meta]</div>
+            
+            
+            <div class="doc"><p>Positional factory function for class immutable<em>int</em>map.PersistentIntMap.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var--%3ETransientIntMap" class="source var-name" href="src/immutable_int_map.clj">-&gt;TransientIntMap</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[root epoch meta]</div>
+            
+            
+            <div class="doc"><p>Positional factory function for class immutable<em>int</em>map.TransientIntMap.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var-int-map" class="source var-name" href="src/immutable_int_map.clj">int-map</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[]</div><div class="usage">[a b]</div><div class="usage">[a b &amp; rest]</div>
+            
+            
+            <div class="doc"><p>Creates an integer map that can only have non-negative integers as keys.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var-merge" class="source var-name" href="src/immutable_int_map.clj">merge</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[]</div><div class="usage">[a b]</div><div class="usage">[a b &amp; rest]</div>
+            
+            
+            <div class="doc"><p>Merges together two int-maps, giving precedence to values from the right-most map.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var-merge-with" class="source var-name" href="src/immutable_int_map.clj">merge-with</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[f]</div><div class="usage">[f a b]</div><div class="usage">[f a b &amp; rest]</div>
+            
+            
+            <div class="doc"><p>Merges together two int-maps, using <code>f</code> to resolve value conflicts.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var-update" class="source var-name" href="src/immutable_int_map.clj">update</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[m k f]</div><div class="usage">[m k f &amp; args]</div>
+            
+            
+            <div class="doc"><p>Updates the value associated with the given key.  If no such key exist, <code>f</code> is invoked
+with <code>nil</code>.</p>
+</div>
+          </div><div class="public">
+            <h3><a id="var-update%21" class="source var-name" href="src/immutable_int_map.clj">update!</a></h3>
+            <h4 class="var-type fn" id="var-type">fn</h4>
+            <div class="usage">[m k f]</div><div class="usage">[m k f &amp; args]</div>
+            
+            
+            <div class="doc"><p>A transient variant of <code>update</code>.</p>
+</div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </body>
+
+</html>
