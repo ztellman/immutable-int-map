@@ -2,6 +2,7 @@
   (:use
     [clojure.test])
   (:require
+    [clojure.core.reducers :as r]
     [immutable-int-map :as i]
     [collection-check :as check]
     [criterium.core :as c]
@@ -62,6 +63,14 @@
   (println "into (int-map) ordered")
   (c/quick-bench
     (into (i/int-map) ordered-entries))
+
+  (println "into (int-map) fold/merge unordered")
+  (c/quick-bench
+    (r/fold i/merge conj entries))
+
+  (println "into (int-map) fold/merge ordered")
+  (c/quick-bench
+    (r/fold i/merge conj ordered-entries))
 
   (let [m (into {} entries)]
     (println "get {}")
