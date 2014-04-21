@@ -1,4 +1,4 @@
-Ths library provides an optimized, sorted map that can only have positive integers as keys, based on Okasaki and Gill's ["Fast Mergeable Integer Maps"](https://www.lri.fr/~filliatr/ftp/ocaml/ds/ptset.ml).  They can be used to represent both normal maps where all keys are integers, or sparse vectors.
+Ths library provides an optimized, sorted map that can only have non-negative 64-bit integers as keys, based on Okasaki and Gill's ["Fast Mergeable Integer Maps"](https://www.lri.fr/~filliatr/ftp/ocaml/ds/ptset.ml).  They can be used to represent sparse vectors, or normal maps whose keys happen to all be integers.
 
 ```clj
 [immutable-int-map "0.1.0"]
@@ -31,7 +31,7 @@ Under the covers, `into` looks something like this:
       [[1 2] [3 4]]))
 ```
 
-This makes use of Clojure's transients, but is still inherently sequential.  This is because merging together standard Clojure maps is an O(N) operation.  However, int-maps merges are usually must faster, which means we can build sub-maps on parallel threads, and then cheaply merge them together.  We can use the `fold` method in `clojure.core.reducers` to easily express this:
+This makes use of Clojure's transients, but is still inherently sequential.  This is because merging together standard Clojure maps is an O(N) operation, so any parallel work would still result in a linear walk of the map's entries to create the final data structure.  However, int-maps merges are typically much faster, which means we can build sub-maps on parallel threads, and then cheaply merge them together.  We can use the `fold` method in `clojure.core.reducers` to easily express this:
 
 ```clj
 > (require '[clojure.core.reducers :as r])
@@ -40,7 +40,7 @@ nil
 ...
 ```
 
-If `entries` is a data structure that `fold` can split, such as a vector, the performance benefits of this are significant.  Consider this table, which gives the times on a four-core system for populating a map with a million entries, with all values in milliseconds:
+If `entries` is a data structure that `fold` can split, such as a vector or hash-map, the performance benefits of this are significant.  Consider this table, which gives the times on a four-core system for populating a map with a million entries, with all values in milliseconds:
 
 | | unsorted entries | sorted entries |
 |----|------------------|-------------|
