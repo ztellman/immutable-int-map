@@ -40,14 +40,14 @@ nil
 ...
 ```
 
-The performance benefits of this are significant.  Consider this table, which gives the times on a four-core system for populating a map with a million entries, with all values in milliseconds:
+If `entries` is a data structure that `fold` can split, such as a vector, the performance benefits of this are significant.  Consider this table, which gives the times on a four-core system for populating a map with a million entries, with all values in milliseconds:
 
 | | unsorted entries | sorted entries |
 |-|------------------|----------------|
-| into {} | 615 | 500 |
-| into (sorted-map) | 2140 | 1200 |
-| into int-map | 1200 | 250 |
-| fold int-map | 375 | 65 |
+| `(into {} ...)` | 615 | 500 |
+| `(into (sorted-map) ...)` | 2140 | 1200 |
+| `(into (int-map) ...)` | 1200 | 250 |
+| `(fold i/merge conj ...)` | 375 | 65 |
 
 As we can see, populating the int-map with keys in non-sorted order is slower (though always faster than Clojure's sorted map implementation), but using `fold` gives us performance that Clojure's standard data structures can't match.
 
