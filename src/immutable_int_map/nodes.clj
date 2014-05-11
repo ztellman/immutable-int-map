@@ -104,7 +104,7 @@
 
   (coll-fold [this n combinef reducef]
     (if (p/< count (* 2 n))
-      (reduce reducef this)
+      (reduce reducef (combinef) this)
       (#'r/fjinvoke
         (fn []
           (let [rt (#'r/fjfork

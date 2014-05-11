@@ -31,7 +31,7 @@ Under the covers, `into` looks something like this:
       [[1 2] [3 4]]))
 ```
 
-This makes use of Clojure's transients, but is still inherently sequential.  This is because merging together standard Clojure maps is an O(N) operation, so any parallel work would still result in a linear walk of the map's entries to create the final data structure.  However, int-maps merges are typically much faster, which means we can build sub-maps on parallel threads, and then cheaply merge them together.  We can use the `fold` method in `clojure.core.reducers` to easily express this:
+This makes use of Clojure's transients, but is still inherently sequential.  This is because merging together standard Clojure maps is an O(N) operation, so any parallel work would still result in a linear walk of the map's entries.  However, int-maps merges are typically much faster, which means we can build sub-maps on parallel threads, and then cheaply merge them together.  We can use the `fold` method in `clojure.core.reducers` to easily express this:
 
 ```clj
 > (require '[clojure.core.reducers :as r])
@@ -50,7 +50,6 @@ If `entries` is a data structure that `fold` can split, such as a vector or hash
 | `(fold i/merge conj ...)` | 375 | 65 |
 
 As we can see, populating the int-map with keys in non-sorted order is slower (though always faster than Clojure's sorted map implementation), but using `fold` gives us performance that Clojure's standard data structures can't match.
-
 
 ### license
 
