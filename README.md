@@ -1,3 +1,9 @@
+# Project Moved to Contrib!
+
+ztellman/immutable-int-map is now [clojure/data.int-map](https://github.com/clojure/data.int-map)
+
+## Immutable Integer Maps
+
 Ths library provides an optimized, sorted map that can only have non-negative 64-bit integers as keys, based on Okasaki and Gill's ["Fast Mergeable Integer Maps"](https://www.lri.fr/~filliatr/ftp/ocaml/ds/ptset.ml).  They can be used to represent sparse vectors, or normal maps whose keys happen to all be integers.
 
 ```clj
